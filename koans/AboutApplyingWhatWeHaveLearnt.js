@@ -39,9 +39,15 @@ describe("About Applying What We Have Learnt", function() {
 
       var productsICanEat = [];
 
-      products.filter
+      //debugger; How cool is this inspector thing? 
+      _.filter(products,function(element){
+        if(!_.contains(element.ingredients, "mushrooms") && !element.containsNuts){
+          productsICanEat.push(element); //this gives me my target pizza
+          return element;
+        }
+      })
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -55,14 +61,21 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
     
-    expect(sum).toBe(FILL_ME_IN);
+    //debugger; 233168
+
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var sum =   _.chain(_.range(1000)) /* try chaining range() and reduce() */
+                .filter(function(element){if (element % 3 === 0 || element % 5 ===0) {return element}})
+                .reduce(function(memo, element){return memo + element},0)
+                .value()
+    //debugger;
 
-    expect(233168).toBe(FILL_ME_IN);
+
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
@@ -74,16 +87,25 @@ describe("About Applying What We Have Learnt", function() {
             ingredientCount[products[i].ingredients[j]] = (ingredientCount[products[i].ingredients[j]] || 0) + 1;
         }
     }
-
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
+
+
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
+  _.chain(products)
+  .map(function(pizza){return pizza.ingredients})
+  .flatten()
+  .map(function(topping){ingredientCount[topping] = (ingredientCount[topping] || 0) + 1})
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+  //I did not use reduce, let me know if I'm lacking a point of understanding here.
+  //The ingredientCount object had access to all the information requested after two maps.
+  //I believe I created too much information so maybe there is efficiency to be gained.
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
