@@ -1,4 +1,4 @@
-//done
+//done... on third try!
 describe("About Mutability", function() {
 
   it("should expect object properties to be public and mutable", function () {
@@ -63,7 +63,7 @@ describe("About Mutability", function() {
       return aPerson.lastname + ", " + aPerson.firstname;
     };
     
-    expect(aPerson.getFullName()).toBe("John Smith");
+    expect(aPerson.getFullName()).toBe("Andrews, Penny");
   });
 
 });
